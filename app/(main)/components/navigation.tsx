@@ -2,10 +2,12 @@
 
 import React, { ElementRef, useEffect, useRef, useState } from 'react';
 
+import { useQuery } from 'convex/react';
 import { ChevronsLeft, MenuIcon } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { useMediaQuery } from 'usehooks-ts';
 
+import { api } from '@/convex/_generated/api';
 import { cn } from '@/lib/utils';
 
 import UserItem from './user-item';
@@ -19,6 +21,7 @@ const Navigation = () => {
   const navbarRef = useRef<ElementRef<'div'>>(null);
   const [isResetting, setIsResetting] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(isMobile);
+  const documents = useQuery(api.documents.get);
 
   useEffect(() => {
     if (isMobile) {
@@ -121,7 +124,12 @@ const Navigation = () => {
           <UserItem />
         </div>
         <div className="mt-4">
-          <p>Documents</p>
+          <p>
+            {documents?.map(document => {
+              return <p key={document._id}>{document.title}</p>;
+            })}
+            Documents
+          </p>
         </div>
         <div
           onMouseDown={handleMouseDown}
