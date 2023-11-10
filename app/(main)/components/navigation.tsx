@@ -2,7 +2,7 @@
 
 import React, { ElementRef, useEffect, useRef, useState } from 'react';
 
-import { useMutation, useQuery } from 'convex/react';
+import { useMutation } from 'convex/react';
 import {
   ChevronsLeft,
   MenuIcon,
@@ -17,6 +17,7 @@ import { useMediaQuery } from 'usehooks-ts';
 import { api } from '@/convex/_generated/api';
 import { cn } from '@/lib/utils';
 
+import DocumentList from './document-list';
 import Item from './item';
 import UserItem from './user-item';
 
@@ -29,7 +30,6 @@ const Navigation = () => {
   const navbarRef = useRef<ElementRef<'div'>>(null);
   const [isResetting, setIsResetting] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(isMobile);
-  const documents = useQuery(api.documents.get);
   const create = useMutation(api.documents.create);
 
   useEffect(() => {
@@ -147,10 +147,7 @@ const Navigation = () => {
         </div>
         <div className="mt-4">
           <p>
-            {documents?.map(document => {
-              return <p key={document._id}>{document.title}</p>;
-            })}
-            Documents
+            <DocumentList />
           </p>
         </div>
         <div
