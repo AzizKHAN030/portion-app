@@ -7,13 +7,20 @@ import {
   ChevronsLeft,
   MenuIcon,
   PlusCircle,
+  PlusIcon,
   Search,
   Settings,
+  Trash,
 } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { toast } from 'sonner';
 import { useMediaQuery } from 'usehooks-ts';
 
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
 import { api } from '@/convex/_generated/api';
 import { cn } from '@/lib/utils';
 
@@ -148,6 +155,18 @@ const Navigation = () => {
         <div className="mt-4">
           <p>
             <DocumentList />
+            <Item onClick={handleCreate} label="Add a page" icon={PlusIcon} />
+            <Popover>
+              <PopoverTrigger className="w-full mt-4">
+                <Item label="Trash" icon={Trash} />
+              </PopoverTrigger>
+              <PopoverContent
+                className="p-0 w-72"
+                side={isMobile ? 'bottom' : 'right'}
+              >
+                <p>Trash box</p>
+              </PopoverContent>
+            </Popover>
           </p>
         </div>
         <div
