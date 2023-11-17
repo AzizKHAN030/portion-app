@@ -1,6 +1,6 @@
 'use client';
 
-import { use, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useUser } from '@clerk/clerk-react';
 import { useQuery } from 'convex/react';
@@ -67,7 +67,9 @@ const SearchCommand = () => {
               key={document._id}
               value={`${document._id}-${document.title}}`}
               title={document.title}
-              onSelect={onSelect}
+              onSelect={() => {
+                onSelect(document._id);
+              }}
             >
               {document.icon ? (
                 <p className="mr-2 text-[18px]">{document.icon}</p>
