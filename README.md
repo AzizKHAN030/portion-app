@@ -1,6 +1,6 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## <a href="[http://example.com](https://portion-mkq1l07vf-azizkhan030.vercel.app/)" target="_blank">Demot</a>
+## <a href="[http://example.com](https://portion-mkq1l07vf-azizkhan030.vercel.app/)" target="_blank" style="color: blue; font-weight: bold;">Demo</a>
 
 ## Getting Started
 
