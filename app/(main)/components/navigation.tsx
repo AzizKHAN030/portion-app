@@ -12,7 +12,7 @@ import {
   Settings,
   Trash,
 } from 'lucide-react';
-import { useParams, usePathname } from 'next/navigation';
+import { useParams, usePathname, useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { useMediaQuery } from 'usehooks-ts';
 
@@ -37,6 +37,7 @@ const Navigation = () => {
   const search = useSearch();
   const settings = useSettings();
   const params = useParams();
+  const router = useRouter();
   const isMobile = useMediaQuery('(max-width: 768px)');
 
   const isResizingRef = useRef(false);
@@ -123,8 +124,10 @@ const Navigation = () => {
     }
   };
 
-  const handleCreate = () => {
-    const promise = create({ title: 'Untitled' });
+  const handleCreate = async () => {
+    const promise = create({ title: 'Untitled' }).then(documentId => {
+      router.push(`/documents/${documentId}`);
+    });
 
     toast.promise(promise, {
       loading: 'Creating document...',
