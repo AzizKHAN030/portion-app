@@ -20,18 +20,15 @@ export const CoverImageModal = () => {
   const update = useMutation(api.documents.update);
 
   const [file, setFile] = useState<File>();
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const onClose = () => {
     setFile(undefined);
-    setIsSubmitting(false);
 
     coverImage.onClose();
   };
 
-  const onChange = async (file: File) => {
+  const onChange = async (file: File | undefined) => {
     if (file) {
-      setIsSubmitting(true);
       setFile(file);
 
       const res = await edgestore.publicFiles.upload({
@@ -57,8 +54,6 @@ export const CoverImageModal = () => {
         <SingleImageDropzone
           onChange={onChange}
           value={file}
-          isSubmitting={isSubmitting}
-          onClose={onClose}
           className="w-full outline-none"
         />
       </DialogContent>
